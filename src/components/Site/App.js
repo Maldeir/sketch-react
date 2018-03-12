@@ -132,7 +132,7 @@ export default class App extends React.Component {
   
   render() {
     let {file, filename, loading, progress} = this.state;
-    
+    console.log('file; ', file);
     return <div style={{height: '100%'}}>
       <Header onSelectFile={this.onSelectFile} file={file} filename={filename}/>
       { loading &&

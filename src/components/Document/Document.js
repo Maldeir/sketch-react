@@ -41,10 +41,14 @@ export default class Document extends React.PureComponent {
     let meta = JSON.parse(await zip.file('meta.json')
       .async('string'));
     let model = parse(json, zip);
+    console.log('model', model)
+    console.log('model.page: ', model.pages)
     for (let i = 0; i < model.pages.length; ++i) {
       let page = model.pages[i] = await model.pages[i].getInstance();
       
       let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+
+
       for (let layer of page.layers) {
         minX = Math.min(minX, layer.frame.x);
         minY = Math.min(minY, layer.frame.y);
@@ -55,6 +59,7 @@ export default class Document extends React.PureComponent {
       minY -= 32;
       maxX += 32;
       maxY += 32;
+
       for (let layer of page.layers) {
         layer.frame.x -= minX;
         layer.frame.y -= minY;
@@ -136,7 +141,12 @@ class DocumentViewer extends React.PureComponent {
   
   render() {
     let {selectedPage, selectedLayer, hoveredLayer} = this.state;
+    console.log('selectedLayer: ', selectedLayer);
+    console.log('selectedPage: ', selectedPage);
+    console.log('hoveredLayer: ', hoveredLayer);
     let {model, ...props} = this.props;
+
+    console.log('model: ', model);
     
     return (
       <div className={styles.document} {...props}>

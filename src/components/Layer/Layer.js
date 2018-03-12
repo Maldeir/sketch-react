@@ -105,6 +105,12 @@ export default class Layer extends React.PureComponent {
     if (Comp === SymbolInstance) {
       layers = getSymbolById(model['symbolID']).layers;
     }
+
+    //This is the layer that inverts everything
+    // console.log('LAYER!!!: ', layers);
+    // if (layers && layers.length > 1) {
+    //   layers = layers.reverse();
+    // }
     return <Comp id={model.do_objectID}
                  model={model}
                  onClick={this.onClick}

@@ -33,17 +33,23 @@ export function getFormattedJSXCode(o, depth = 0) {
       if (o.childNodes.length === 0) {
         return `${spaces}<${tagName} style={${cssText2jsxCode(o.style.cssText)}}/>\n`;
       }
+      // console.log('o: ', o);
+      // console.log('o.chidren: ', o.childNodes.reverse());
       return `${spaces}<${tagName} style={${cssText2jsxCode(o.style.cssText)}}>\n${Array.prototype.map.call(o.childNodes, child => getFormattedJSXCode(child, depth + 1)).join('')}${spaces}</${tagName}>\n`
   }
 }
 
 export function getReactCode(o) {
+  console.log('geetReactCode called', o);
   return `import React from 'react'
 
 export default class MyComp extends React.Component {
   render(){
     return (
-${getFormattedJSXCode(o, 3, true)}    );
+    <div style={{position: "relative", }}>
+${getFormattedJSXCode(o, 3, true)}    
+    </div>
+);
   }
 }`
 }
